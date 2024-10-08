@@ -1,5 +1,5 @@
 export default function updateStudentGradeByCity(arr, str, grades) {
-  const students = [...arr.filter((a) => a.location === str)];
+  // const students = arr.filter((a) => a.location === str);
   // students.forEach((e) => {
   //   grades.forEach((g) => {
   //     if (e.id === g.studentId) {
@@ -10,16 +10,23 @@ export default function updateStudentGradeByCity(arr, str, grades) {
   //     e.grade = 'N/A';
   //   }
   // });
-  students.map(s => {
-    grades.map(g => {
-      if(s.id === g.studentId)
-      {
-        s.grade = g.grade
+  // return students.map((student) => {
+  //   const grade = grades.find((g) => g.studentId === student.id);
+  //   student.grade = grade ? grade.grade : 'N/A';
+  //   return student;
+  // });
+  return arr.filter((a) => a.location === str).map((student) => {
+    grades.map((grade) => {
+      if (grade.studentId === student.id) {
+        // eslint-disable-next-line no-param-reassign
+        student.grade = grade.grade;
       }
-    })
-    if (!('grade' in s) ) {
-      s.grade = 'N/A';
+      return student;
+    });
+    if (!('grade' in student)) {
+      // eslint-disable-next-line no-param-reassign
+      student.grade = 'N/A';
     }
-  })
-  return students;
+    return student;
+  });
 }
